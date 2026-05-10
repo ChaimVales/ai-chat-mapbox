@@ -35,6 +35,7 @@ FEATURE: <feature-name>
 | 6 | `edit-message` | עריכת הודעה והרצה מחדש | ❌ |
 | 7 | `search-history` | חיפוש בשיחות קודמות | ❌ |
 | 8 | `export-chat` | הורדת שיחה כ-Markdown | ❌ |
+| 8b | `export-excel` | הורדת תשובה כ-Excel (RTL/LTR אוטומטי) | ✅ xlsx |
 | 9 | `voice-input` | מיקרופון (דיבור→טקסט) | ❌ Web Speech API |
 | 10 | `voice-output` | רמקול (TTS) בכל הודעה | ❌ Web Speech API |
 | 11 | `image-upload` | העלאת תמונה (Gemini multimodal) | ❌ |

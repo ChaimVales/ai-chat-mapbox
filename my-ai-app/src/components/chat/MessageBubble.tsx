@@ -13,6 +13,9 @@ import { RegenerateButton } from '../../features/regenerate/feature';
 // === FEATURE: edit-message ===
 import { EditButton } from '../../features/edit-message/feature';
 // === END FEATURE: edit-message ===
+// === FEATURE: export-excel ===
+import { ExcelButton } from '../../features/export-excel/feature';
+// === END FEATURE: export-excel ===
 
 interface Props {
   message: ChatMessage;
@@ -75,6 +78,9 @@ export function MessageBubble({ message }: Props) {
           {isAssistant && <CopyButton text={message.content} />}
           {isAssistant && <SpeakButton text={message.content} />}
           {isAssistant && <RegenerateButton />}
+          {/* === FEATURE: export-excel === */}
+          {isAssistant && <ExcelButton text={message.content} />}
+          {/* === END FEATURE: export-excel === */}
           {isUser && <EditButton message={message} />}
         </div>
       </div>
