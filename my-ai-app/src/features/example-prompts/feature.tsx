@@ -7,7 +7,7 @@
  *   - src/components/welcome/WelcomeScreen.tsx (render <ExamplePrompts />)
  */
 
-import { MapPin, Table2, Route, Code2, Pizza, Navigation } from 'lucide-react';
+import { MapPin, Table2, Route, Code2, Pizza, Navigation, Sparkles } from 'lucide-react';
 import { useChatStore } from '../../store/chatStore';
 import { useHistoryStore } from '../../store/historyStore';
 import { useUserLocationStore } from '../user-location/feature';
@@ -20,6 +20,52 @@ interface Example {
 }
 
 const EXAMPLES: Example[] = [
+  {
+    icon: <Sparkles className="w-4 h-4" />,
+    label: 'כל הפורמטים',
+    prompt: `תן לי דוגמה מלאה של כל סוגי העיצוב ב-Markdown שאתה יודע לעשות. כלול:
+
+# כותרת H1
+## כותרת H2
+### כותרת H3
+
+טקסט רגיל עם **טקסט מודגש** ועם *טקסט נטוי* ועם ~~טקסט מחוק~~.
+
+רשימה עם בולטים:
+- פריט ראשון
+- פריט שני
+- פריט שלישי
+
+רשימה ממוספרת:
+1. צעד אחד
+2. צעד שני
+3. צעד שלישי
+
+טבלה:
+| עמודה 1 | עמודה 2 | עמודה 3 |
+|---------|---------|---------|
+| ערך A   | ערך B   | ערך C   |
+| ערך D   | ערך E   | ערך F   |
+
+קוד inline: \`const x = 5\`
+
+בלוק קוד:
+\`\`\`javascript
+function hello() {
+  console.log("שלום עולם");
+}
+\`\`\`
+
+ציטוט:
+> זאת דוגמה לציטוט עם רעיון חכם
+
+קישור: [GitHub שלי](https://github.com/ChaimVales)
+
+קו מפריד:
+---
+
+זה הסוף.`,
+  },
   {
     icon: <MapPin className="w-4 h-4" />,
     label: 'מיקום',

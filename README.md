@@ -148,6 +148,15 @@ ai-chat-mapbox/
 | 🌡️ **Temperature** | סליידר ליצירתיות (0=יציב, 1=יצירתי) |
 | 📝 **System prompt** | אישיות מותאמת ל-AI |
 | 📑 **Multi-tab chats** | כמה שיחות פתוחות במקביל |
+| 📊 **Export Excel** | הורדת תשובה כ-Excel עם זיהוי RTL/LTR אוטומטי |
+
+### 📍 Location (3 פיצ'רים חדשים)
+
+| פיצ'ר | תיאור |
+|-------|--------|
+| 📌 **User Location** | שיתוף מיקום + reverse geocoding (איזה עיר) |
+| 🍕 **Nearby POI** | "קרוב אליי" - חיפוש פיצה/קפה/דלק/בנק לפי המיקום |
+| 🧭 **Routing** | "ניווט" - מסלול A→B עם Mapbox Directions (רכב/הליכה) |
 
 ### 🗺️ Map (10 פיצ'רים)
 
@@ -176,6 +185,9 @@ ai-chat-mapbox/
 | ⌨️ **Keyboard shortcuts** | Ctrl+K, Ctrl+/, Esc |
 | 🚀 **Onboarding tour** | סיור היכרות לראשונה |
 | 🎨 **Custom themes** | בחירת צבע ראשי לעיצוב |
+| ❓ **Help** | מדריך שימוש זמין תמיד (כפתור ?) |
+| 🗑️ **Reset** | איפוס מלא של ההגדרות + reload |
+| 💡 **Example prompts** | דוגמאות שאלות במסך הראשי (פיצה קרובה, ניווט, וכו') |
 
 📖 **לרשימה מלאה ופירוט** - ראה [`my-ai-app/src/features/FEATURES.md`](my-ai-app/src/features/FEATURES.md)
 

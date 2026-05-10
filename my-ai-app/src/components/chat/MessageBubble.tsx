@@ -1,5 +1,11 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+// === FEATURE: code-highlighting ===
+import { CodeBlock } from '../../features/code-highlighting/feature';
+// === END FEATURE: code-highlighting ===
+// === FEATURE: latex-math ===
+import { remarkPlugins as mathRemark, rehypePlugins as mathRehype } from '../../features/latex-math/feature';
+// === END FEATURE: latex-math ===
 import clsx from 'clsx';
 import { User, Sparkles, AlertCircle } from 'lucide-react';
 import type { ChatMessage } from '../../types';
@@ -69,8 +75,45 @@ export function MessageBubble({ message }: Props) {
         {isUser ? (
           <p className="whitespace-pre-wrap">{message.content}</p>
         ) : (
-          <div className="prose prose-sm dark:prose-invert max-w-none prose-p:my-1 prose-headings:my-2">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
+          <div
+            className={clsx(
+              'prose prose-sm dark:prose-invert max-w-none',
+              // Tighter spacing
+              'prose-p:my-1 prose-headings:my-2 prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5',
+              // Bold/italic emphasis
+              'prose-strong:text-current prose-strong:font-bold',
+              'prose-em:text-current prose-em:italic',
+              // Inline code (between backticks)
+              'prose-code:bg-slate-200 dark:prose-code:bg-slate-800',
+              'prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm',
+              'prose-code:before:content-none prose-code:after:content-none',
+              // Code blocks (```)
+              'prose-pre:bg-slate-900 prose-pre:text-slate-100',
+              'prose-pre:rounded-lg prose-pre:p-3 prose-pre:my-2',
+              // Tables
+              'prose-table:my-2 prose-th:bg-slate-200 dark:prose-th:bg-slate-800',
+              'prose-th:p-2 prose-td:p-2 prose-th:border prose-td:border',
+              'prose-th:border-slate-300 prose-td:border-slate-300',
+              'dark:prose-th:border-slate-600 dark:prose-td:border-slate-600',
+              // Blockquotes
+              'prose-blockquote:border-s-4 prose-blockquote:border-blue-500',
+              'prose-blockquote:ps-3 prose-blockquote:italic prose-blockquote:my-2',
+              // Links
+              'prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:underline',
+              // Headings
+              'prose-h1:text-xl prose-h2:text-lg prose-h3:text-base',
+              'prose-h1:font-bold prose-h2:font-bold prose-h3:font-semibold',
+              // Horizontal rule
+              'prose-hr:my-3 prose-hr:border-slate-300 dark:prose-hr:border-slate-600',
+            )}
+          >
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm, ...mathRemark]}
+              rehypePlugins={mathRehype}
+              components={{ code: CodeBlock as never }}
+            >
+              {message.content}
+            </ReactMarkdown>
           </div>
         )}
 
