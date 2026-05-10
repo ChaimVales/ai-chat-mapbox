@@ -5,6 +5,12 @@ import { LayersControl } from './LayersControl';
 // === FEATURE: clusters + heatmap ===
 import { RenderModeControl } from './RenderModeControl';
 // === END FEATURE: clusters + heatmap ===
+// === FEATURE: nearby-poi ===
+import { NearbyButton } from '../../features/nearby-poi/feature';
+// === END FEATURE: nearby-poi ===
+// === FEATURE: routing ===
+import { RoutingButton } from '../../features/routing/feature';
+// === END FEATURE: routing ===
 import { LayerToggleControl } from '../../features/layer-toggle/feature';
 import { ColorPicker } from '../../features/polygon-color/feature';
 import { MapSearch } from '../../features/map-search/feature';
@@ -134,6 +140,12 @@ export function MapView({ onMapReady }: Props) {
       {/* === FEATURE: clusters + heatmap === */}
       <RenderModeControl />
       {/* === END FEATURE: clusters + heatmap === */}
+      {/* === FEATURE: nearby-poi === */}
+      <NearbyButton />
+      {/* === END FEATURE: nearby-poi === */}
+      {/* === FEATURE: routing === */}
+      <RoutingButton />
+      {/* === END FEATURE: routing === */}
     </div>
   );
 }

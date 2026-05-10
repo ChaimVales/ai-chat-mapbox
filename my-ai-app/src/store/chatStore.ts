@@ -7,6 +7,9 @@ import { useMapStore } from './mapStore';
 import { useSystemPromptStore } from '../features/system-prompt/feature';
 import { DEFAULT_SYSTEM_PROMPT } from '../features/system-prompt/defaultPrompt';
 // === END FEATURE: system-prompt ===
+// === FEATURE: user-location ===
+import { useUserLocationStore } from '../features/user-location/feature';
+// === END FEATURE: user-location ===
 // === FEATURE: model-selector ===
 import { useModelStore } from '../features/model-selector/feature';
 // === END FEATURE: model-selector ===
@@ -70,13 +73,18 @@ export const useChatStore = create<ChatState>((set, get) => ({
         // === END FEATURE: image-upload ===
       }));
 
-      // === FEATURE: system-prompt ===
+      // === FEATURE: system-prompt + user-location ===
       const userSysPrompt = useSystemPromptStore.getState().systemPrompt;
-      const finalSysPrompt = userSysPrompt
-        ? `${DEFAULT_SYSTEM_PROMPT}\n\n## הוראות נוספות מהמשתמש:\n${userSysPrompt}`
-        : DEFAULT_SYSTEM_PROMPT;
+      const loc = useUserLocationStore.getState();
+      let finalSysPrompt = DEFAULT_SYSTEM_PROMPT;
+      if (loc.hasLocation()) {
+        finalSysPrompt += `\n\n## מיקום נוכחי של המשתמש (שתף מיקום):\n- קואורדינטות: ${loc.lat}, ${loc.lng}\n- עיר: ${loc.city || 'לא ידוע'}\n\nכשהמשתמש שואל "קרוב אליי" או "איפה X הקרובה" - השתמש במיקום הזה.`;
+      }
+      if (userSysPrompt) {
+        finalSysPrompt += `\n\n## הוראות נוספות מהמשתמש:\n${userSysPrompt}`;
+      }
       messages.unshift({ role: 'system', content: finalSysPrompt });
-      // === END FEATURE: system-prompt ===
+      // === END FEATURE: system-prompt + user-location ===
 
       // === FEATURE: model-selector + temperature-slider ===
       const model = useModelStore.getState().model;

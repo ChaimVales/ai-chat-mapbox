@@ -1,20 +1,22 @@
 /**
  * FEATURE: example-prompts
  * Suggested prompts shown on welcome screen.
- * Click → fills the chat input.
+ * Click → fills the chat input + opens chat.
  *
  * Files this feature touches:
  *   - src/components/welcome/WelcomeScreen.tsx (render <ExamplePrompts />)
  */
 
-import { MapPin, Table2, Route, Code2 } from 'lucide-react';
+import { MapPin, Table2, Route, Code2, Pizza, Navigation } from 'lucide-react';
 import { useChatStore } from '../../store/chatStore';
 import { useHistoryStore } from '../../store/historyStore';
+import { useUserLocationStore } from '../user-location/feature';
 
 interface Example {
   icon: React.ReactNode;
   label: string;
   prompt: string;
+  needsLocation?: boolean;
 }
 
 const EXAMPLES: Example[] = [
@@ -22,6 +24,18 @@ const EXAMPLES: Example[] = [
     icon: <MapPin className="w-4 h-4" />,
     label: 'מיקום',
     prompt: 'איפה נמצאת חיפה? תן לי GeoJSON Point.',
+  },
+  {
+    icon: <Pizza className="w-4 h-4" />,
+    label: 'פיצה קרובה',
+    prompt: 'איפה החנות פיצה הקרובה אליי? תן לי GeoJSON Point של 3 פיצריות באזור שלי.',
+    needsLocation: true,
+  },
+  {
+    icon: <Navigation className="w-4 h-4" />,
+    label: 'איך מגיעים?',
+    prompt: 'איך אני מגיע לרחוב רוטשילד ברעננה? תן לי GeoJSON LineString של המסלול.',
+    needsLocation: true,
   },
   {
     icon: <Route className="w-4 h-4" />,
@@ -52,10 +66,15 @@ interface Props {
 export function ExamplePrompts({ onSelect }: Props) {
   const sendMessage = useChatStore((s) => s.sendMessage);
   const saveConversation = useHistoryStore((s) => s.saveConversation);
+  const hasLocation = useUserLocationStore((s) => s.hasLocation());
 
-  const handleClick = async (prompt: string) => {
+  const handleClick = async (ex: Example) => {
+    if (ex.needsLocation && !hasLocation) {
+      alert('צריך לשתף מיקום קודם (כפתור "שתף מיקום" למעלה)');
+      return;
+    }
     onSelect?.();
-    await sendMessage(prompt);
+    await sendMessage(ex.prompt);
     const msgs = useChatStore.getState().messages;
     if (msgs.length > 0) saveConversation(msgs);
   };
@@ -65,9 +84,10 @@ export function ExamplePrompts({ onSelect }: Props) {
       {EXAMPLES.map((ex) => (
         <button
           key={ex.label}
-          onClick={() => handleClick(ex.prompt)}
-          className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg shadow text-sm transition-colors"
-          title={ex.prompt}
+          onClick={() => handleClick(ex)}
+          disabled={ex.needsLocation && !hasLocation}
+          className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg shadow text-sm transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          title={ex.needsLocation && !hasLocation ? 'דורש שיתוף מיקום' : ex.prompt}
         >
           {ex.icon}
           <span>{ex.label}</span>

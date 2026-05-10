@@ -8,6 +8,15 @@ import { ThemePicker } from '../../features/custom-themes/feature';
 // === FEATURE: example-prompts ===
 import { ExamplePrompts } from '../../features/example-prompts/feature';
 // === END FEATURE: example-prompts ===
+// === FEATURE: user-location ===
+import { LocationButton } from '../../features/user-location/feature';
+// === END FEATURE: user-location ===
+// === FEATURE: help ===
+import { HelpButton } from '../../features/help/feature';
+// === END FEATURE: help ===
+// === FEATURE: reset-user ===
+import { ResetButton } from '../../features/reset-user/feature';
+// === END FEATURE: reset-user ===
 
 interface Props {
   onPromptSelect?: () => void;
@@ -24,6 +33,12 @@ export function WelcomeScreen({ onPromptSelect }: Props = {}) {
         {/* === FEATURE: custom-themes === */}
         <ThemePicker />
         {/* === END FEATURE: custom-themes === */}
+        {/* === FEATURE: help === */}
+        <HelpButton />
+        {/* === END FEATURE: help === */}
+        {/* === FEATURE: reset-user === */}
+        <ResetButton />
+        {/* === END FEATURE: reset-user === */}
       </div>
 
       <div className="mb-6 p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-xl">
@@ -37,6 +52,12 @@ export function WelcomeScreen({ onPromptSelect }: Props = {}) {
       <p className="text-lg text-slate-600 dark:text-slate-300 max-w-md mb-6">
         {t('welcome.subtitle')}
       </p>
+
+      {/* === FEATURE: user-location === */}
+      <div className="mb-4">
+        <LocationButton />
+      </div>
+      {/* === END FEATURE: user-location === */}
 
       {/* === FEATURE: example-prompts === */}
       <ExamplePrompts onSelect={onPromptSelect} />
