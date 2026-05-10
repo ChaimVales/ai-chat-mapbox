@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  html[dir='rtl'] {
+    direction: rtl;
+  }
+
+  html[dir='ltr'] {
+    direction: ltr;
+  }
+
+  body {
+    @apply bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100;
+    @apply transition-colors duration-200;
+  }
+}

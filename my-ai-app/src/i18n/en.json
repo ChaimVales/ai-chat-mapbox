@@ -1,0 +1,39 @@
+{
+  "welcome": {
+    "title": "Welcome",
+    "subtitle": "Smart AI-powered assistant",
+    "cta": "Click the button in the corner to get started"
+  },
+  "chat": {
+    "title": "Assistant",
+    "placeholder": "Ask me anything...",
+    "send": "Send",
+    "stop": "Stop",
+    "loading": "Thinking...",
+    "error": "An error occurred. Try again.",
+    "history": "History",
+    "newChat": "New chat",
+    "clear": "Clear chat",
+    "delete": "Delete"
+  },
+  "map": {
+    "loading": "Loading map...",
+    "noToken": "Mapbox token missing. Check your .env",
+    "layers": "Layers",
+    "satellite": "Satellite",
+    "streets": "Streets",
+    "outdoors": "Outdoors"
+  },
+  "common": {
+    "close": "Close",
+    "open": "Open",
+    "save": "Save",
+    "cancel": "Cancel",
+    "copy": "Copy",
+    "settings": "Settings"
+  },
+  "theme": {
+    "light": "Light mode",
+    "dark": "Dark mode"
+  }
+}
